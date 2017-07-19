@@ -6,10 +6,12 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="Pratice2017New" />
         <module name="solitarius" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="Pratice2017New" target="1.6" />
       <module name="solitarius" target="1.6" />
     </bytecodeTargetLevel>
   </component>

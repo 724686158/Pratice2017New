@@ -14,6 +14,9 @@ public class Good {
     private double discount;
     private String good_description;
 
+    public Good() {
+    }
+
     public Good(String good_name, double good_price, String imageurl) {
         this.good_name = good_name;
         this.good_price = good_price;
