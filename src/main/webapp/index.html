@@ -12,7 +12,7 @@
     <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
 
     <script src="http://code.jquery.com/jquery.js"></script>
-    <script src="js/app.js"></script>
+<!--    <script src="js/test.js"></script>-->
     <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
     <link href="css/style.css" rel="stylesheet">
 
@@ -23,7 +23,11 @@
   </head>
 
   <body>
-
+		<div id="tag"></div>
+		<div class="active">
+			<div id="tag">
+			</div>
+		</div>
     <div class="container">
 
       <div class="masthead">
@@ -33,42 +37,11 @@
             <div class="container">
               <ul class="nav">
                 <li class="active"><a href="index.html">主页</a></li>
-                
-                <li><a href="checkout.html">结账</a></li>
-                <li><a href="new.html">创建订单</a></li>
+                <li><a href="list.html">商品列表</a></li>
+                <li><a href="checkout.html">购物车</a></li>
+                <!--<li><a href="new.html">创建订单</a></li>-->
                 <li><a href="status.html">订单状态</a></li>
-
-                <li class="dropdown">
-				  <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-				    分类
-				    <b class="caret"></b>
-				  </a>
-				  <ul class="dropdown-menu">
-				    <li class="nav-header">男士</li>
-				    <li><a href="list.html">衣服</a></li>
-				    <li><a href="list.html">鞋</a></li>
-				    <li><a href="list.html">手表</a></li>
-				    <li><a href="list.html">珠宝</a></li>
-				    <li class="divider"></li>
-				    <li class="nav-header">女士</li>
-				    <li><a href="list.html">衣服</a></li>
-				    <li><a href="list.html">鞋</a></li>
-				    <li><a href="list.html">手表</a></li>
-				    <li><a href="list.html">珠宝</a></li>
-				  </ul>
-				</li>
-
-                <li class="dropdown">
-				  <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-				    Pages
-				    <span class="caret"></span>
-				  </a>
-				  <ul class="dropdown-menu">
-				    <li><a href="aboutus.html">关于我们</a></li>
-				    <li><a href="contactus.html">联系我们</a></li>
-				  </ul>
-				</li>
-
+								<li><a href="aboutus.html">关于我们</a></li>
               </ul>
             </div>
           </div>
@@ -86,11 +59,11 @@
 
       <!-- Example row of columns -->
       <div class="row-fluid">
-        <ul class="thumbnails">
+        <ul class="thumbnails" id="ul1">
           <li class="span4">
             <div class="thumbnail">
-              <img alt="300x200" src="https://img11.360buyimg.com/n1/jfs/t3202/122/9474814023/314096/cce5ece6/58d38f1fN2058d702.jpg">
-              <div class="caption">
+              <img name="pic1" src="http://placehold.it/300x200" id="img1">
+             	<div class="caption">
                 <h3>Product A</h3>
                 <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
                 <p><a href="checkout.html" class="btn btn-primary">Add To Cart</a> <a href="view.html" class="btn">View</a></p>
@@ -99,7 +72,7 @@
           </li>
           <li class="span4">
             <div class="thumbnail">
-              <img alt="300x200" src="https://img13.360buyimg.com/n1/jfs/t3946/125/460549879/234074/8eba86ae/5850b92eNe41bf399.jpg">
+              <img alt="300x200" src="http://placehold.it/300x200">
               <div class="caption">
                 <h3>Product B</h3>
                 <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
@@ -109,7 +82,7 @@
           </li>
           <li class="span4">
             <div class="thumbnail">
-              <img alt="300x200" src="http://img3x7.ddimg.cn/98/28/1316289347-1_k_1.jpg">
+              <img alt="300x200" src="http://placehold.it/300x200">
               <div class="caption">
                 <h3>Product C</h3>
                 <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
@@ -122,11 +95,9 @@
 
       <hr>
 
-
       <div class="footer">
         <p>&copy; Company 2014</p>
       </div>
-
 
     </div> <!-- /container -->
 
