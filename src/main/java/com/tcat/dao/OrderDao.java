@@ -4,6 +4,8 @@ import com.tcat.model.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.sql.Date;
 import java.sql.ResultSet;
@@ -13,6 +15,7 @@ import java.util.List;
 /**
  * Created by lzw on 2017/7/18.
  */
+@Repository
 public class OrderDao {
     @Autowired
     private JdbcTemplate jdbc;
@@ -25,7 +28,7 @@ public class OrderDao {
     }
     public List<Order> allOrder()
     {
-        List<Order> query=jdbc.query("SELECT * FROM  good",new OrderRowMapper());
+        List<Order> query=jdbc.query("SELECT * FROM order",new OrderRowMapper());
         if(query!=null&&!query.isEmpty())
         {
             return query;
@@ -39,10 +42,10 @@ public class OrderDao {
              String order_delivery,
              long user_id,
              long good_id,
-             int number,
+             int number1,
              double cost) {
-        jdbc.update("INSERT INTO order(order_id,createTime,order_state,order_delivery,user_id,number,cost) VALUE (?, ?, ?, ?, ?, ?, ?,?)",
-                order_id,createTime,order_state,order_delivery,user_id,number,cost);
+        jdbc.update("INSERT INTO order(order_id,order_createtime,order_state,order_delivery,user_id, good_id, number,cost) VALUE (?, ?, ?, ?, ?, ?, ?, ?)",
+                order_id,createTime,order_state,order_delivery,user_id,good_id,number1,cost);
     }
 
     public void modifyOrder(long order_id,
@@ -52,7 +55,7 @@ public class OrderDao {
                             int number,
                             double cost
                           ) {
-        jdbc.update("UPDATE order SET creattime = ? AND order_state = ? AND order_delivery = ? And number = ? AND cost =  ? WHERE order_id = ?",
+        jdbc.update("UPDATE order SET order_createtime = ? AND order_state = ? AND order_delivery = ? And number = ? AND cost =  ? WHERE order_id = ?",
                createTime,order_state,order_delivery,number,cost,order_id);
     }
 
@@ -68,7 +71,7 @@ public class OrderDao {
             order.setOrder_id(rs.getLong("order_id"));
             order.setGood_id(rs.getLong("good_id"));
             order.setCost(rs.getDouble("cost"));
-            order.setCreateTime(rs.getDate("creattime"));
+            order.setOrder_createtime(rs.getDate("order_createtime"));
             order.setNumber(rs.getInt("number"));
             order.setOrder_delivery(rs.getString("order_delivery"));
             order.setUser_id(rs.getLong("user_id"));

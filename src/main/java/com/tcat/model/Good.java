@@ -1,7 +1,6 @@
 package com.tcat.model;
 
 import java.sql.Date;
-import java.time.LocalDate;
 
 /**
  * Created by Administrator on 2017/5/20.
@@ -10,18 +9,9 @@ public class Good {
     private long good_id;
     private String good_name;
     private double good_price;
-    private String imageurl;
-    private double discount;
+    private String good_imageurl;
+    private double good_discount;
     private String good_description;
-
-    public Good() {
-    }
-
-    public Good(String good_name, double good_price, String imageurl) {
-        this.good_name = good_name;
-        this.good_price = good_price;
-        this.imageurl = imageurl;
-    }
 
     public long getGood_id() {
         return good_id;
@@ -48,19 +38,19 @@ public class Good {
     }
 
     public String getImageurl() {
-        return imageurl;
+        return good_imageurl;
     }
 
     public void setImageurl(String imageurl) {
-        this.imageurl = imageurl;
+        this.good_imageurl = imageurl;
     }
 
     public double getDiscount() {
-        return discount;
+        return good_discount;
     }
 
     public void setDiscount(double discount) {
-        this.discount = discount;
+        this.good_discount = discount;
     }
 
     public String getGood_description() {
@@ -69,5 +59,17 @@ public class Good {
 
     public void setGood_description(String good_description) {
         this.good_description = good_description;
+    }
+
+    @Override
+    public String toString() {
+        return "Good{" +
+                "good_id=" + good_id +
+                ", good_name='" + good_name + '\'' +
+                ", good_price=" + good_price +
+                ", good_imageurl='" + good_imageurl + '\'' +
+                ", good_discount=" + good_discount +
+                ", good_description='" + good_description + '\'' +
+                '}';
     }
 }

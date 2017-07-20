@@ -4,6 +4,8 @@ import com.tcat.model.Shoppingrecord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.sql.Date;
 import java.sql.ResultSet;
@@ -13,6 +15,7 @@ import java.util.List;
 /**
  * Created by lzw on 2017/7/18.
  */
+@Repository
 public class ShoppingrecordDao {
     @Autowired
     private JdbcTemplate jdbc;
@@ -34,11 +37,11 @@ public class ShoppingrecordDao {
             return null;
     }
     public void addShoppingrecord(long shoppingrecord_id,
-                                  long user_id,
+                                  long good_id,
                                   int number,
                                   Date recordtime) {
-        jdbc.update("INSERT INTO shoppingrecord(shoppingrecord_id,user_id,number,recordtime) VALUE (?, ?, ?, ?)",
-                shoppingrecord_id,user_id,number,recordtime);
+        jdbc.update("INSERT INTO shoppingrecord(shoppingrecord_id,good_id,number,recordtime) VALUE (?, ?, ?, ?)",
+                shoppingrecord_id,good_id,number,recordtime);
     }
 
     public void modifyShoppuingrecord(long shoppingrecord_id,
@@ -60,7 +63,7 @@ public class ShoppingrecordDao {
            shop.setNumber(rs.getInt("number"));
            shop.setRecord_time(rs.getDate("record_time"));
            shop.setShoppingcart_id(rs.getLong("shoppingcart_id"));
-           shop.setUser_id(rs.getLong("user_id"));
+           shop.setGood_id(rs.getLong("good_id"));
             return shop;
         }
     }

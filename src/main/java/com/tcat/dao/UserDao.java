@@ -4,6 +4,8 @@ import com.tcat.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.sql.Date;
 import java.sql.ResultSet;
@@ -13,6 +15,7 @@ import java.util.List;
 /**
  * Created by lzw on 2017/7/18.
  */
+@Repository
 public class UserDao {
     @Autowired
     private JdbcTemplate jdbc;
@@ -40,7 +43,7 @@ public class UserDao {
                         String user_address,
                         String user_email,
                         Date regtime) {
-        jdbc.update("INSERT INTO user(user_id,user_name,user_password,user_tel,user_address,user_email,regtime) VALUE (?, ?, ?, ?, ?, ?, ?)",
+        jdbc.update("INSERT INTO user(user_id,user_name,user_password,user_tel,user_address,user_email,user_regtime) VALUE (?, ?, ?, ?, ?, ?, ?)",
                 user_id,user_name,user_password,user_tel,user_address,user_email,regtime);
     }
 
@@ -50,9 +53,9 @@ public class UserDao {
                            String user_tel,
                            String user_address,
                            String user_email,
-                           Date regtime) {
-        jdbc.update("UPDATE user SET user_id = ? AND user_name = ? AND user_password = ? AND user_tel = ? AND user_address = ?  WHERE address_id = ?",
-                user_name,user_password,user_tel,user_address,user_email,regtime,user_id);
+                           Date user_regtime) {
+        jdbc.update("UPDATE user SET user_name = ? AND user_password = ? AND user_tel = ? AND user_address = ?  AND user_email = ?  AND user_regtime = ? WHERE user_id = ?",
+                user_name,user_password,user_tel,user_address,user_email,user_regtime,user_id);
     }
 
     public void deleteUser(long user_id) {
@@ -64,13 +67,13 @@ public class UserDao {
         @Override
         public User mapRow(ResultSet rs, int rowNum) throws SQLException {
             User user = new User();
-           user.setUser_id(rs.getLong("user_id"));
-           user.setUser_name(rs.getString("user_name"));
-           user.setUser_password(rs.getString("user_password"));
-           user.setUser_address(rs.getString("user_address"));
-           user.setUser_email(rs.getString("user_email"));
-           user.setUser_tel(rs.getString("user_tel"));
-           user.setRegtime(rs.getDate("regtime"));
+            user.setUser_id(rs.getLong("user_id"));
+            user.setUser_name(rs.getString("user_name"));
+            user.setUser_password(rs.getString("user_password"));
+            user.setUser_address(rs.getString("user_address"));
+            user.setUser_email(rs.getString("user_email"));
+            user.setUser_tel(rs.getString("user_tel"));
+            user.setRegtime(rs.getDate("user_regtime"));
             return user;
         }
     }

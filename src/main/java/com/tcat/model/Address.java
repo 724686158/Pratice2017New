@@ -9,9 +9,6 @@ public class Address {
     private long user_id;
     private String address_data;
 
-    public Address() {
-    }
-
     public long getAddress_id() {
         return address_id;
     }

@@ -1,5 +1,6 @@
 package com.tcat.model;
 
+import javax.xml.crypto.Data;
 import java.sql.Date;
 
 /**
@@ -13,10 +14,7 @@ public class User
     private  String user_tel;
     private String user_address;
     private String user_email;
-    private Date regtime;
-
-    public User() {
-    }
+    private Date user_regtime;
 
     public long getUser_id() {
         return user_id;
@@ -67,10 +65,10 @@ public class User
     }
 
     public Date getRegtime() {
-        return regtime;
+        return user_regtime;
     }
 
     public void setRegtime(Date regtime) {
-        this.regtime = regtime;
+        this.user_regtime = regtime;
     }
 }

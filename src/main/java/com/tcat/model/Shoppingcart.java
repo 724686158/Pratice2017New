@@ -7,9 +7,6 @@ public class Shoppingcart {
     private long shoppingcart_id;
     private long user_id;
 
-    public Shoppingcart() {
-    }
-
     public long getShoppingcart_id() {
         return shoppingcart_id;
     }

@@ -6,20 +6,17 @@ import java.sql.Date;
  * Created by lzw on 2017/7/18.
  */
 public class Shoppingrecord {
-    private  long user_id;
+    private  long good_id;
     private long shoppingcart_id;
     private int number;
     private Date record_time;
 
-    public Shoppingrecord() {
+    public long getGood_id() {
+        return good_id;
     }
 
-    public long getUser_id() {
-        return user_id;
-    }
-
-    public void setUser_id(long user_id) {
-        this.user_id = user_id;
+    public void setGood_id(long good_id) {
+        this.good_id = good_id;
     }
 
     public long getShoppingcart_id() {

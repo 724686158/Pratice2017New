@@ -8,7 +8,7 @@ import java.sql.Date;
 public class Order
 {
     private long order_id;
-    private Date createTime;
+    private Date order_createtime;
     private String order_state;
     private String order_delivery;
     private long user_id;
@@ -16,7 +16,12 @@ public class Order
     private int number;
     private double cost;
 
-    public Order() {
+    public Date getOrder_createtime() {
+        return order_createtime;
+    }
+
+    public void setOrder_createtime(Date order_createtime) {
+        this.order_createtime = order_createtime;
     }
 
     public long getOrder_id() {
@@ -25,14 +30,6 @@ public class Order
 
     public void setOrder_id(long order_id) {
         this.order_id = order_id;
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
     }
 
     public long getGood_id() {
