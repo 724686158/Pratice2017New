@@ -20,7 +20,7 @@ public class OrderDao {
     @Autowired
     private JdbcTemplate jdbc;
     public Order findOrder(long order_id) {
-        List<Order> query = jdbc.query("SELECT * FROM order WHERE order_id = ?",
+        List<Order> query = jdbc.query("SELECT * FROM `order` WHERE order_id = ?",
                 new OrderRowMapper(), order_id);
         if (query != null && !query.isEmpty())
             return query.get(0);
@@ -28,7 +28,7 @@ public class OrderDao {
     }
     public List<Order> allOrder()
     {
-        List<Order> query=jdbc.query("SELECT * FROM order",new OrderRowMapper());
+        List<Order> query=jdbc.query("SELECT * FROM `order`",new OrderRowMapper());
         if(query!=null&&!query.isEmpty())
         {
             return query;
@@ -44,7 +44,7 @@ public class OrderDao {
              long good_id,
              int number1,
              double cost) {
-        jdbc.update("INSERT INTO order(order_id,order_createtime,order_state,order_delivery,user_id, good_id, number,cost) VALUE (?, ?, ?, ?, ?, ?, ?, ?)",
+        jdbc.update("INSERT INTO `order`(order_id,order_createtime,order_state,order_delivery,user_id, good_id, number,cost) VALUE (?, ?, ?, ?, ?, ?, ?, ?)",
                 order_id,createTime,order_state,order_delivery,user_id,good_id,number1,cost);
     }
 
@@ -55,12 +55,12 @@ public class OrderDao {
                             int number,
                             double cost
                           ) {
-        jdbc.update("UPDATE order SET order_createtime = ? AND order_state = ? AND order_delivery = ? And number = ? AND cost =  ? WHERE order_id = ?",
+        jdbc.update("UPDATE `order` SET order_createtime = ? AND order_state = ? AND order_delivery = ? And number = ? AND cost =  ? WHERE order_id = ?",
                createTime,order_state,order_delivery,number,cost,order_id);
     }
 
     public void deleteOrder(long order_id) {
-        jdbc.update("DELETE from order  WHERE order_id = ?",
+        jdbc.update("DELETE from `order`  WHERE order_id = ?",
                 order_id);
     }
 

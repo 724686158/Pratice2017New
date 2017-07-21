@@ -50,9 +50,6 @@
                 </div>
                 <div class="block-content collapse in">
                     <div class="span12">
-                        <div class="alert alert-error">Some Error Message!</div>
-                        <div class="alert alert-success">Success! Paypal transaction ID: X8l7Wof56xso<br />Thanks for you order!</div>
-
                         <p>
                             <table class="table table-hover table-striped" id="table_id">
                                 <tr>
@@ -62,11 +59,12 @@
                                     <th>快递</th>
                                     <th>订单状态</th>
                                     <th>价格</th>
+                                    <th>下单时间</th>
                                 </tr>
                             </table>
                         </p>
 											<script>
-												function orderList(order_id,good_id,num,order_delivery,status,price){
+												function orderList(order_id,good_id,num,order_delivery,status,price,date){
 													var str='<tr>'+
                                   '<td>'+order_id+'</td>'+
                                   '<td>'+good_id+'</td>'+
@@ -74,49 +72,38 @@
                                   '<td>'+order_delivery+'</td>'+
                                   '<td>'+status+'</td>'+
                                   '<td>'+price+'</td>'+
+                                  '<td>'+date+'</td>'+
                                 	'</tr>';
                           return str;
 												}
-												var e=[{"order_id":10001,"good_id":20001,"num":2,"order_delivery":"顺丰","status":"配送中","price":5000}];
-		                		var order_id;
-		                		var good_id;
-		                		var num;
-		                		var order_delivery;
-		                		var status;
-		                		var price;
-		                		var j=0;
-		                		for(var i=0;i<e.length;i++) {
-								            var obj=e[i];
-								            for (var key in obj){
-								            		if(j==0){
-								            				order_id=obj[key];	
-								            		}else if(j==1){
-								            				good_id=obj[key];
-								            		}else if(j==2){
-								            				num=obj[key];
-								            		}else if(j==3){
-								            				order_delivery=obj[key];
-								            		}else if(j==4){
-								            				status=obj[key];
-								            		}else if(j==5){
-								            				price=obj[key];
-								            				var str=orderList(order_id,good_id,num,order_delivery,status,price);
-								            				$('#table_id').append(str);
-								            				j=0;
-								            		}
-								            		j++;
-								            }
-		                		}
+												$.get(url="http://localhost:38080/OrderInfos?user_id=1016", function(e){
+													var order_id;
+			                		var good_id;
+			                		var num;
+			                		var order_delivery;
+			                		var status;
+			                		var price;
+			                		var date;
+			                		for(var i=0;i<e.length;i++) {
+									            var obj=e[i];
+					            				order_id=obj["order_id"];
+					            				good_id=obj["good_name"];
+					            				num=obj["number"];
+					            				order_delivery=obj["order_delivery"];
+					            				status=obj["order_state"];
+					            				price=obj["cost"];
+                                                date=obj["order_createtime"];
+					            				var str=orderList(order_id,good_id,num,order_delivery,status,price,date);
+					            				$('#table_id').append(str);
+			                		}
+			                	});
 											</script>
                     </div>
                 </div>
             </div>
         </div>
-	
-      <hr>
-
       <div class="footer">
-        <p>&copy; Company 2014</p>
+        <p>&copy; 2017小学期</p>
       </div>
 
     </div> <!-- /container -->

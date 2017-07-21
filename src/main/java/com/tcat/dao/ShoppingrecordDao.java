@@ -19,13 +19,14 @@ import java.util.List;
 public class ShoppingrecordDao {
     @Autowired
     private JdbcTemplate jdbc;
-    public Shoppingrecord findShoppingrecord(long shoppingrecord_id) {
-        List<Shoppingrecord> query = jdbc.query("SELECT * FROM shoppingrecord WHERE shoppingrecord_id = ?",
-                new ShoppingrecordRowMapper(), shoppingrecord_id);
+    public Shoppingrecord findShoppingrecord(long shoppingcart_id, long good_id) {
+        List<Shoppingrecord> query = jdbc.query("SELECT * FROM shoppingrecord WHERE shoppingcart_id = ? AND good_id = ?",
+                new ShoppingrecordRowMapper(), shoppingcart_id, good_id);
         if (query != null && !query.isEmpty())
             return query.get(0);
         return null;
     }
+
     public List<Shoppingrecord> allShoppingrecord()
     {
         List<Shoppingrecord> query=jdbc.query("SELECT * FROM  shoppingrecord",new ShoppingrecordRowMapper());
@@ -40,20 +41,21 @@ public class ShoppingrecordDao {
                                   long good_id,
                                   int number,
                                   Date recordtime) {
-        jdbc.update("INSERT INTO shoppingrecord(shoppingrecord_id,good_id,number,recordtime) VALUE (?, ?, ?, ?)",
+        jdbc.update("INSERT INTO shoppingrecord(shoppingcart_id,good_id,number,recordtime) VALUE (?, ?, ?, ?)",
                 shoppingrecord_id,good_id,number,recordtime);
     }
 
-    public void modifyShoppuingrecord(long shoppingrecord_id,
+    public void modifyShoppuingrecord(long shoppingcart_id,
+                                      long good_id,
                                       int number,
                                       Date recordtime) {
-        jdbc.update("UPDATE shoppingrecord SET  number = ? AND recordtime = ?  WHERE shoppingrecord_id = ?",
-                number,recordtime,shoppingrecord_id);
+        jdbc.update("UPDATE shoppingrecord SET  number = ? AND recordtime = ?  WHERE shoppingcart_id = ? AND good_id = ?",
+                number,recordtime,shoppingcart_id, good_id);
     }
 
-    public void deleteShoppingrecord(long shoppingrecord_id) {
-        jdbc.update("DELETE from shoppingrecord  WHERE .shoppingrecord_id = ?",
-               shoppingrecord_id);
+    public void deleteShoppingrecord(long shoppingcart_id, long good_id) {
+        jdbc.update("DELETE from shoppingrecord  WHERE shoppingcart_id = ? AND good_id = ?",
+                shoppingcart_id, good_id);
     }
 
     public class ShoppingrecordRowMapper implements RowMapper<Shoppingrecord> {

@@ -48,74 +48,63 @@
         
       </div>
       <script>
-				function ini(name, price, img, discount, desciption){
+				function ini(good_id,good_name, good_price, imageurl, discount, good_desciption,i){
 						var str='<li class="span3">'+
-			            '<div class="thumbnail">'+
-			            '<img src="'+img+'">'+
-			            '<div class="caption">'+
-			            '<h3>'+name+'</h3>'+
-			            '<p>价格：'+price+'</p>'+
-			            '<p>折扣：'+discount+'</p>'+
-			            '<p>描述：'+desciption+'</p>'+
-			            '<p><a href="checkout.html" class="btn btn-primary">加入购物车</a> <a href="view.html" class="btn">详情</a></p>'+
-			            '</div>'+
-			            '</div>'+
-			          	'</li>';
-			          	return str;
+					            '<div class="thumbnail">'+
+					            	'<img src="'+imageurl+'">'+
+						            '<div class="caption">'+
+						            '<h3>'+good_name+'</h3>'+
+						            '<p>价格：'+good_price+'</p>'+
+						            '<p>折扣：'+discount+'</p>'+
+						            '<p>描述：'+good_desciption+'</p>'+
+						            '<p>'+
+						            	'<form id="addToCart_'+i+'" action="list.html" method="get">'+
+								            '<input id="button_'+i+'" type="button" class="btn btn-primary" value="加入购物车" onclick="addToCart(id)"></input>'+
+								            '<input type="hidden" name="good_id" value="'+good_id+'"></input>'+
+						            	'</form>'+
+						            '</p>'+
+						            '</div>'+
+					            '</div>'+
+				          	'</li>';
+			      return str;
 				}
-		    /*$.get(url="http://localhost:38080/products", function(e){*/
-		   	var e=[{"good_id":0,"good_name":"探路者跑步鞋","good_price":599.0,"imageurl":"http://img.sootuu.com/vector/2006-4/2006420114643989.jpg","discount":0.0,"good_description":null},
-		 			  	 {"good_id":0,"good_name":"品胜 10000毫安 移动电源","good_price":95.0,"imageurl":"http://img.sootuu.com/vector/2006-4/2006420114643989.jpg","discount":0.0,"good_description":null},
-		           {"good_id":0,"good_name":"东芝SD卡16G内存卡","good_price":54.9,"imageurl":"http://img.sootuu.com/vector/2006-4/2006420114643989.jpg","discount":0.0,"good_description":null},
-		   	       {"good_id":0,"good_name":"小米（MI）体重秤","good_price":199.0,"imageurl":"http://img.sootuu.com/vector/2006-4/2006420114643989.jpg","discount":0.0,"good_description":null},
-		   				 {"good_id":0,"good_name":"小米（MI）体重秤","good_price":199.0,"imageurl":"http://img.sootuu.com/vector/2006-4/2006420114643989.jpg","discount":0.0,"good_description":null}];
-        var name;
-        var price;
-        var img;
-        var discount;
-        var description;
-        var i=1;
-        var j=0;
-        for(var i=0;i<e.length;i++) {
-            var obj=e[i];
-            for (var key in obj){//遍历键值对
-                if(j==1){
-                    name=obj[key];
-                }else if(j==2){
-                    price=obj[key];
-                }else if(j==3){
-                    img=obj[key];
-                }else if(j==4){
-                		discount=obj[key];
-                }else if(j==5){
-                		description=obj[key];
-                    	if(i==0||i%4==0){
-                            var str='<ul class="thumbnails" id=id_'+i+'>'+
-                                    ini(name,price,img,discount,description)+
-                                    '</ul>';
-                            var id_="id_"+i;
-                            $(".row-fluid").append(str);
-                        }else{
-                            str=ini(name,price,img,discount,description);
-                            $("#"+id_).append(str);
-                        }
-                    	j=-1;
-                }
-                j++;
+				function addToCart(button_id){
+					var index=button_id.charAt(button_id.length-1);
+					$('#addToCart_'+index).submit();
+				}
+		    $.get(url="http://localhost:38080/AllGood?user_id=1016", function(e){
+		    	var good_id;
+			   	var good_name;
+	        var good_price;
+	        var imageurl;
+	        var discount;
+	        var good_desciption;
+	        for(var i=0;i<e.length;i++) {
+              var obj=e[i];
+              good_id=obj["good_id"];
+              good_name=obj["good_name"];
+              good_price=obj["good_price"];
+              imageurl=obj["imageurl"];
+              discount=obj["discount"];
+              good_desciption=obj["good_description"];
+              if(i%4==0){
+                  var str='<ul class="thumbnails" id=id_'+i+'>'+
+                      ini(good_id,good_name,good_price,imageurl,discount,good_desciption,i)+
+                      '</ul>';
+                  var id_="id_"+i;
+                  $(".row-fluid").append(str);
+              }else{
+                  str=ini(good_id,good_name,good_price,imageurl,discount,good_desciption,i);
+                  $("#"+id_).append(str);
+              }
             }
-        }
-                  /*  });*/
-						/*
-						$.each(obj,function(key){//遍历json对象的键值对     						
-							console.log(key+":"+obj[key]);
-						}); */
+         });
 			</script>
       <hr>
 
       <div class="footer">
-        <p>&copy; Company 2014</p>
+        <p>&copy; 2017小学期</p>
       </div>
-
     </div> <!-- /container -->
 
   </body>
