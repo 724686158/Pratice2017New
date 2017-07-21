@@ -40,12 +40,25 @@ public class SampleController {
         return "htmlviews/index.html";
     }
 
+    @RequestMapping("/login")
+    @ResponseBody
+    String login(HttpServletRequest request) {
+        String user_id = request.getParameter("user_id");
+        String user_password = request.getParameter("user_password");
+        List<User> users = userDao.allUser();
+        User user = userDao.findUser(Long.parseLong(user_id));
+        if (user != null){
+            return user_id;
+        }else {
+            return "FAIL";
+        }
+    }
+
     @RequestMapping("/hello")
     @ResponseBody
     Map<String, String> hello() {
         return Collections.singletonMap("message", "Hello, World!");
     }
-
 
     @RequestMapping("/AllAddress")
     @ResponseBody

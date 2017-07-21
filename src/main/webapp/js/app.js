@@ -23,7 +23,3 @@ $(function() {
 		}
 	});
 });
-
-$.get("http://www.baidu.com", function(data){
-	alert(data);
-});

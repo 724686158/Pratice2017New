@@ -31,43 +31,12 @@
           <div class="navbar-inner">
             <div class="container">
               <ul class="nav">
-                <li class="active"><a href="index.html">主页</a></li>
-                
-                <li><a href="checkout.html">结账</a></li>
-                <li><a href="new.html">创建订单</a></li>
-                <li><a href="status.html">订单状态</a></li>
-
-                <li class="dropdown">
-				  <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-				    分类
-				    <b class="caret"></b>
-				  </a>
-				  <ul class="dropdown-menu">
-				    <li class="nav-header">男士</li>
-				    <li><a href="list.html">衣服</a></li>
-				    <li><a href="list.html">鞋</a></li>
-				    <li><a href="list.html">手表</a></li>
-				    <li><a href="list.html">珠宝</a></li>
-				    <li class="divider"></li>
-				    <li class="nav-header">女士</li>
-				    <li><a href="list.html">衣服</a></li>
-				    <li><a href="list.html">鞋</a></li>
-				    <li><a href="list.html">手表</a></li>
-				    <li><a href="list.html">珠宝</a></li>
-				  </ul>
-				</li>
-
-                <li class="dropdown">
-				  <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-				    Pages
-				    <span class="caret"></span>
-				  </a>
-				  <ul class="dropdown-menu">
-				    <li><a href="aboutus.html">关于我们</a></li>
-				    <li><a href="contactus.html">联系我们</a></li>
-				  </ul>
-				</li>
-
+                <li><a href="index.html">主页</a></li>
+                <li class="active"><a href="list.html">商品列表</a></li>
+                <li><a href="checkout.html">购物车</a></li>
+                <!--<li><a href="new.html">创建订单</a></li>-->
+                <li><a href="order-complete.html">订单状态</a></li>
+								<li><a href="aboutus.html">关于我们</a></li>
               </ul>
             </div>
           </div>
@@ -88,50 +57,54 @@
 			            '<p>价格：'+price+'</p>'+
 			            '<p>折扣：'+discount+'</p>'+
 			            '<p>描述：'+desciption+'</p>'+
-			            '<p><a href="checkout.html" class="btn btn-primary">Add To Cart</a> <a href="view.html" class="btn">View</a></p>'+
+			            '<p><a href="checkout.html" class="btn btn-primary">加入购物车</a> <a href="view.html" class="btn">详情</a></p>'+
 			            '</div>'+
 			            '</div>'+
 			          	'</li>';
 			          	return str;
-					}
-                    $.get(url="http://localhost:38080/products", function(e){
-                        var name;
-                        var price;
-                        var img;
-                        var discount;
-                        var description;
-                        var i=1;
-                        var j=0;
-                        for(var i=0;i<e.length;i++) {
-                            var obj=e[i];
-                            for (var key in obj){//遍历键值对
-                                console.log(obj[key]);
-                                if(j==1){
-                                    name=obj[key];
-                                }else if(j==2){
-                                    price=obj[key];
-                                }else if(j==3){
-                                    img=obj[key];
-                                }else if(j==4){
-                                		discount=obj[key];
-                                }else if(j==5){
-                                		description=obj[key];
-	                                	if(i==0||i%4==0){
-	                                        var str='<ul class="thumbnails" id=id_'+i+'>'+
-	                                                ini(name,price,img,discount,description)+
-	                                                '</ul>';
-	                                        var id_="id_"+i;
-	                                        $(".row-fluid").append(str);
-	                                    }else{
-	                                        str=ini(name,price,img,discount,description);
-	                                        $("#"+id_).append(str);
-	                                    }
-	                                	j=-1;
-                                }
-                                j++;
-                            }
+				}
+		    /*$.get(url="http://localhost:38080/products", function(e){*/
+		   	var e=[{"good_id":0,"good_name":"探路者跑步鞋","good_price":599.0,"imageurl":"http://img.sootuu.com/vector/2006-4/2006420114643989.jpg","discount":0.0,"good_description":null},
+		 			  	 {"good_id":0,"good_name":"品胜 10000毫安 移动电源","good_price":95.0,"imageurl":"http://img.sootuu.com/vector/2006-4/2006420114643989.jpg","discount":0.0,"good_description":null},
+		           {"good_id":0,"good_name":"东芝SD卡16G内存卡","good_price":54.9,"imageurl":"http://img.sootuu.com/vector/2006-4/2006420114643989.jpg","discount":0.0,"good_description":null},
+		   	       {"good_id":0,"good_name":"小米（MI）体重秤","good_price":199.0,"imageurl":"http://img.sootuu.com/vector/2006-4/2006420114643989.jpg","discount":0.0,"good_description":null},
+		   				 {"good_id":0,"good_name":"小米（MI）体重秤","good_price":199.0,"imageurl":"http://img.sootuu.com/vector/2006-4/2006420114643989.jpg","discount":0.0,"good_description":null}];
+        var name;
+        var price;
+        var img;
+        var discount;
+        var description;
+        var i=1;
+        var j=0;
+        for(var i=0;i<e.length;i++) {
+            var obj=e[i];
+            for (var key in obj){//遍历键值对
+                if(j==1){
+                    name=obj[key];
+                }else if(j==2){
+                    price=obj[key];
+                }else if(j==3){
+                    img=obj[key];
+                }else if(j==4){
+                		discount=obj[key];
+                }else if(j==5){
+                		description=obj[key];
+                    	if(i==0||i%4==0){
+                            var str='<ul class="thumbnails" id=id_'+i+'>'+
+                                    ini(name,price,img,discount,description)+
+                                    '</ul>';
+                            var id_="id_"+i;
+                            $(".row-fluid").append(str);
+                        }else{
+                            str=ini(name,price,img,discount,description);
+                            $("#"+id_).append(str);
                         }
-                    });
+                    	j=-1;
+                }
+                j++;
+            }
+        }
+                  /*  });*/
 						/*
 						$.each(obj,function(key){//遍历json对象的键值对     						
 							console.log(key+":"+obj[key]);
