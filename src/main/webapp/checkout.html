@@ -26,7 +26,7 @@
     <div class="container">
 
       <div class="masthead">
-        <h3 class="muted">Store Title</h3>
+        <h3 class="muted">T-CAT</h3>
         <div class="navbar">
           <div class="navbar-inner">
             <div class="container">
@@ -88,10 +88,10 @@
 		                		var good_number;
 		                		for(var i=0;i<e.length;i++) {
 								            var obj=e[i];
-				            				good_name=obj["good_name"];	
-				            				imageurl=obj["imageurl"];
-				            				good_number=obj["good_number"];
-				            				good_price=obj["good_price"];
+				            				good_name=obj["goodName"];
+				            				imageurl=obj["imageUrl"];
+				            				good_number=obj["number"];
+				            				good_price=obj["price"];
 				            				var str=checkout(imageurl,good_name,good_price,good_number,i);
 				            				$('#form_id').append(str);
 		                		}

@@ -41,7 +41,7 @@ public class ShoppingrecordDao {
                                   long good_id,
                                   int number,
                                   Date recordtime) {
-        jdbc.update("INSERT INTO shoppingrecord(shoppingcart_id,good_id,number,recordtime) VALUE (?, ?, ?, ?)",
+        jdbc.update("INSERT INTO shoppingrecord(shoppingcart_id,good_id, number,record_time) VALUE (?, ?, ?, ?)",
                 shoppingrecord_id,good_id,number,recordtime);
     }
 

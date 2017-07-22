@@ -26,7 +26,7 @@
     <div class="container">
 
       <div class="masthead">
-        <h3 class="muted">Store Title</h3>
+        <h3 class="muted">T-CAT</h3>
         <div class="navbar">
           <div class="navbar-inner">
             <div class="container">
@@ -58,8 +58,8 @@
 						            '<p>折扣：'+discount+'</p>'+
 						            '<p>描述：'+good_desciption+'</p>'+
 						            '<p>'+
-						            	'<form id="addToCart_'+i+'" action="list.html" method="get">'+
-								            '<input id="button_'+i+'" type="button" class="btn btn-primary" value="加入购物车" onclick="addToCart(id)"></input>'+
+						            	'<form id="addToCart_'+i+'" action="checkout.html" method="get">'+
+								            '<input id="button_'+i+'" type="button" class="btn btn-primary" value="加入购物车" onclick="addToCart(id, '+good_id+')"></input>'+
 								            '<input type="hidden" name="good_id" value="'+good_id+'"></input>'+
 						            	'</form>'+
 						            '</p>'+
@@ -68,8 +68,9 @@
 				          	'</li>';
 			      return str;
 				}
-				function addToCart(button_id){
+				function addToCart(button_id, good_id){
 					var index=button_id.charAt(button_id.length-1);
+                    $.get(url="http://localhost:38080/AddIntoShoppingcart?user_id=1016&good_id=" + good_id, function(){});
 					$('#addToCart_'+index).submit();
 				}
 		    $.get(url="http://localhost:38080/AllGood?user_id=1016", function(e){

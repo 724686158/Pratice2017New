@@ -7,9 +7,7 @@ import com.tcat.bean.OrderInfo;
 import com.tcat.bean.ShoppingcartInfo;
 import com.tcat.dao.*;
 import com.tcat.model.*;
-import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.*;
 import org.springframework.boot.autoconfigure.*;
 import org.springframework.stereotype.*;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +23,8 @@ import java.util.Map;
 @EnableAutoConfiguration
 public class SampleController {
 
-    static long orderDao_num = 20000000;
+    static long orderDao_num = 300000;
+
 
     @Autowired
     private AddressDao addressDao;
@@ -47,15 +46,17 @@ public class SampleController {
 
     @RequestMapping("/login")
     @ResponseBody
-    String login(HttpServletRequest request) {
-        String user_id = request.getParameter("user_id");
-        String user_password = request.getParameter("user_password");
-        List<User> users = userDao.allUser();
-        User user = userDao.findUser(Long.parseLong(user_id));
-        if (user != null){
-            return user_id;
+    private String login(HttpServletRequest request)
+    {
+        String userid = request.getParameter("userid");
+        String password = request.getParameter("password");
+        System.out.println(userid+" "+password);
+        User user = userDao.findUser(Long.parseLong(userid));
+        if (user != null && user.getUser_password().equals(password)){
+            now_user_id = userid;
+            return userid;
         }else {
-            return "FAIL";
+            return null;
         }
     }
 
@@ -93,16 +94,25 @@ public class SampleController {
     @RequestMapping("/AddIntoShoppingcart")
     @ResponseBody
     void AddIntoShoppingcart(HttpServletRequest request){
-        String user_id = request.getParameter("user_id");
+        String user_id = now_user_id;
         String good_id = request.getParameter("good_id");
+        System.out.println(user_id);
+        System.out.println(good_id);
+        List<Shoppingcart> shoppingcarts = shoppingcartDao.allShoppingcart();
+        int size = shoppingcarts.size();
+        for(int i = 0;i < size; i++){
+            if(shoppingcarts.get(i).getUser_id() == Long.parseLong(user_id)) {
+                java.util.Date d = new java.util.Date();
+                shoppingrecordDao.addShoppingrecord(shoppingcarts.get(i).getShoppingcart_id(), Long.parseLong(good_id), 1, new java.sql.Date(d.getTime()));
+            }
+        }
     }
 
 
     @RequestMapping("/ShoppingcartPay")
     @ResponseBody
     void ShoppingcartPay(HttpServletRequest request){
-        String user_id = request.getParameter("user_id");
-        System.out.println(user_id);
+        String user_id = now_user_id;
         List<Shoppingcart> shoppingcarts = shoppingcartDao.allShoppingcart();
         List<Shoppingrecord> shoppingrecords = shoppingrecordDao.allShoppingrecord();
         int size = shoppingcarts.size();
@@ -132,7 +142,7 @@ public class SampleController {
     List<ShoppingcartInfo> ShoppingcartInfos(HttpServletRequest request) {
 
         List<ShoppingcartInfo> ans = new ArrayList<ShoppingcartInfo>();
-        String user_id = request.getParameter("user_id");
+        String user_id = now_user_id;
 
         List<Shoppingcart> shoppingcarts = shoppingcartDao.allShoppingcart();
         List<Shoppingrecord> shoppingrecords = shoppingrecordDao.allShoppingrecord();
@@ -152,7 +162,7 @@ public class SampleController {
         }
         return ans;
     }
-
+    static String now_user_id = "1016";
 
     // 获取购物车实际信息
     @RequestMapping("/OrderInfos")
@@ -160,7 +170,7 @@ public class SampleController {
     List<OrderInfo> OrderInfos(HttpServletRequest request) {
 
         List<OrderInfo> ans = new ArrayList<OrderInfo>();
-        String user_id = request.getParameter("user_id");
+        String user_id = now_user_id;
 
         List<Order> orders = orderDao.allOrder();
         List<Good> goods = goodDao.allGood();
